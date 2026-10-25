@@ -1,23 +1,344 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Login - Study Planner</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Planner - Student Login</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 950px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: white;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 15px 45px #24104b44;
+        }
+
+        .welcome {
+            background: linear-gradient(145deg, #5145cd, #a052e9);
+            color: white;
+            padding: 45px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .logo {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .welcome h1 {
+            font-size: 32px;
+            line-height: 1.35;
+            margin-bottom: 18px;
+        }
+
+        .welcome p {
+            line-height: 1.8;
+            color: #f0eaff;
+        }
+
+        .features {
+            margin-top: 25px;
+            line-height: 2.5;
+        }
+
+        .form-area {
+            padding: 38px 32px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            padding: 5px;
+            border-radius: 12px;
+            background: #f0edff;
+            margin-bottom: 25px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px 5px;
+            border: none;
+            border-radius: 9px;
+            cursor: pointer;
+            background: transparent;
+            color: #625580;
+            font-weight: bold;
+        }
+
+        .tab.active {
+            background: linear-gradient(135deg, #6254dd, #a052e9);
+            color: white;
+        }
+
+        h2 {
+            color: #292044;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #817b92;
+            font-size: 14px;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: bold;
+            color: #38304e;
+            margin-bottom: 7px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #e0dced;
+            border-radius: 9px;
+            outline: none;
+            font-size: 14px;
+            background: #fcfbff;
+        }
+
+        input:focus, select:focus {
+            border-color: #8065e9;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 8px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #6254dd, #a052e9);
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .footer {
+            margin-top: 22px;
+            text-align: center;
+            font-size: 12px;
+            color: #8b849c;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                grid-template-columns: 1fr;
+                max-width: 430px;
+            }
+
+            .welcome {
+                padding: 25px;
+            }
+
+            .welcome h1 {
+                font-size: 25px;
+            }
+
+            .logo {
+                font-size: 32px;
+                margin-bottom: 10px;
+            }
+
+            .features {
+                display: none;
+            }
+
+            .form-area {
+                padding: 25px 22px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h2>Competitive Exam Study Planner</h2>
-    <h3>Login</h3>
+<div class="container">
 
-    <form method="POST">
-        <label>Email:</label>
-        <input type="email" name="email" required>
-        <br><br>
+    <div class="welcome">
+        <div class="logo">📚</div>
+        <h1>Your Goals.<br>Your Plan.<br>Your Success.</h1>
 
-        <label>Password:</label>
-        <input type="password" name="password" required>
-        <br><br>
+        <p>
+            Prepare smarter for competitive exams.
+            Organize your subjects, plan your study time,
+            and track your preparation.
+        </p>
 
-        <button type="submit">Login</button>
-    </form>
+        <div class="features">
+            ✨ Personalized study planning<br>
+            📅 Daily study targets<br>
+            🎯 Track your progress
+        </div>
+    </div>
+
+    <div class="form-area">
+
+        <div class="tabs">
+            <button type="button" class="tab active"
+                    id="loginTab" onclick="showForm('login')">
+                Student Login
+            </button>
+
+            <button type="button" class="tab"
+                    id="registerTab" onclick="showForm('register')">
+                Create Account
+            </button>
+        </div>
+
+        <div id="loginForm">
+            <h2>Welcome Back! 👋</h2>
+            <p class="subtitle">Log in to continue your preparation.</p>
+
+            <form method="POST" action="{{ url_for('login') }}">
+                <div class="form-group">
+                    <label for="loginEmail">Student Email</label>
+                    <input type="email" id="loginEmail" name="email"
+                           placeholder="you@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword"
+                           name="password" placeholder="Enter password"
+                           required>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Login to Study Planner →
+                </button>
+            </form>
+        </div>
+
+        <div id="registerForm" class="hidden">
+            <h2>Create Student Account 🎓</h2>
+            <p class="subtitle">Start planning your success today.</p>
+
+            <form method="POST" action="{{ url_for('register') }}"
+                  onsubmit="return checkPasswords()">
+
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="name"
+                           placeholder="Enter your full name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerEmail">Student Email</label>
+                    <input type="email" id="registerEmail" name="email"
+                           placeholder="you@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="exam">Preparing For</label>
+                    <select id="exam" name="exam" required>
+                        <option value="">Choose your exam</option>
+                        <option value="UPSC">UPSC</option>
+                        <option value="SSC">SSC</option>
+                        <option value="Banking">Banking Exams</option>
+                        <option value="GATE">GATE</option>
+                        <option value="EAMCET">EAMCET</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerPassword">Create Password</label>
+                    <input type="password" id="registerPassword"
+                           name="password" minlength="8"
+                           placeholder="At least 8 characters" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword"
+                           name="confirm_password" minlength="8"
+                           placeholder="Enter password again" required>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Create My Account →
+                </button>
+            </form>
+        </div>
+
+        <div class="footer">
+            Competitive Exam Study Planner · Study smarter ✨
+        </div>
+    </div>
+</div>
+
+<script>
+    function showForm(form) {
+        const login = form === "login";
+
+        document.getElementById("loginForm").classList.toggle(
+            "hidden", !login
+        );
+
+        document.getElementById("registerForm").classList.toggle(
+            "hidden", login
+        );
+
+        document.getElementById("loginTab").classList.toggle(
+            "active", login
+        );
+
+        document.getElementById("registerTab").classList.toggle(
+            "active", !login
+        );
+    }
+
+    function checkPasswords() {
+        const password = document.getElementById("registerPassword").value;
+        const confirm = document.getElementById("confirmPassword").value;
+
+        if (password !== confirm) {
+            alert("Passwords do not match!");
+            return false;
+        }
+
+        return true;
+    }
+</script>
+
 </body>
 </html>
+
