@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block title %}Login | Study Planner{% endblock %}
+{% block content %}
+<div class="auth-layout"><section class="auth-promo"><div class="brand light"><span class="brand-icon">SP</span><span><b>Study Planner</b><small>Competitive Exam Companion</small></span></div><div><h1>Your goal.<br>Your plan.<br>Your success.</h1><p>Build a consistent study routine, track topics, and prepare with confidence.</p><div class="promo-pills"><span>✓ Daily targets</span><span>✓ Progress tracking</span><span>✓ Personal notes</span></div></div><small>Small steps every day lead to big results.</small></section>
+<section class="auth-form-wrap"><form class="auth-card" method="post"><span class="eyebrow">WELCOME BACK</span><h2>Log in to your planner</h2><p class="muted">Continue where you left off.</p>
+<label>Email address<input type="email" name="email" placeholder="you@example.com" required autocomplete="email"></label>
+<label>Password<input type="password" name="password" placeholder="Enter your password" required autocomplete="current-password"></label>
+<button class="btn full" type="submit">Log In →</button><p class="auth-switch">New here? <a href="{{ url_for('signup') }}">Create an account</a></p>
+<p class="small-note">Your account must be registered first. Your study data is saved in the local database.</p></form></section></div>
+{% endblock %}

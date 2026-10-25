@@ -1,0 +1,15 @@
+{% extends "base.html" %}{% block title %}Create Account | Study Planner{% endblock %}
+{% block content %}
+<div class="auth-layout"><section class="auth-promo"><div class="brand light"><span class="brand-icon">SP</span><span><b>Study Planner</b><small>Competitive Exam Companion</small></span></div><div><h1>Prepare smarter.<br>One day at a time.</h1><p>Create your own study space with subjects, tasks, notes, and progress tracking.</p><div class="promo-pills"><span>✓ Personal dashboard</span><span>✓ Saved study plans</span><span>✓ Mock test records</span></div></div><small>Made for students, built for consistency.</small></section>
+<section class="auth-form-wrap"><form class="auth-card signup-card" method="post"><span class="eyebrow">LET'S GET STARTED</span><h2>Create your account</h2><p class="muted">Tell us a little about your preparation so we can personalise your planner.</p>
+<div class="form-grid">
+<label class="span-two">Full name *<input name="full_name" placeholder="e.g. Rohith Kumar" required autocomplete="name"></label>
+<label>Email address *<input type="email" name="email" placeholder="you@example.com" required autocomplete="email"></label>
+<label>Phone number<input type="tel" name="phone" placeholder="10-digit mobile number" pattern="[0-9+() -]{8,16}" autocomplete="tel"></label>
+<label class="span-two">Target competitive exam *<select name="target_exam" required><option value="">Choose your exam</option><option>UPSC Civil Services</option><option>SSC CGL</option><option>Banking (IBPS/SBI)</option><option>Railway Exams</option><option>GATE</option><option>State Public Service Commission</option><option>Other competitive exam</option></select></label>
+<label>Target year<input name="target_year" placeholder="e.g. 2027" inputmode="numeric"></label>
+<label>Daily study goal (hours)<input type="number" name="daily_goal" min="0.5" max="16" step="0.5" value="3" required></label>
+<label>Password *<input type="password" name="password" placeholder="At least 8 characters" minlength="8" required autocomplete="new-password"></label>
+<label>Confirm password *<input type="password" name="confirm_password" placeholder="Re-enter password" minlength="8" required autocomplete="new-password"></label>
+</div><button class="btn full" type="submit">Create Account →</button><p class="auth-switch">Already have an account? <a href="{{ url_for('login') }}">Log in</a></p><p class="small-note">Fields marked * are required. Your password is stored as a secure hash, not plain text.</p></form></section></div>
+{% endblock %}

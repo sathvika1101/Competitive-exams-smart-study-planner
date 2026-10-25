@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Study Planner{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+{% if session.get('user_id') %}
+<aside class="sidebar">
+  <a class="brand" href="{{ url_for('dashboard') }}"><span class="brand-icon">SP</span><span><b>Study Planner</b><small>Competitive Exam</small></span></a>
+  <div class="avatar">{{ (user.full_name[0] if user else 'S')|upper }}</div>
+  <div class="side-name">{{ user.full_name if user else 'Student' }}</div>
+  <nav>
+    <a class="{{ 'active' if request.endpoint=='dashboard' else '' }}" href="{{ url_for('dashboard') }}">▦ &nbsp; Dashboard</a>
+    <a class="{{ 'active' if request.endpoint=='subjects' else '' }}" href="{{ url_for('subjects') }}">▤ &nbsp; Subjects</a>
+    <a class="{{ 'active' if request.endpoint=='study_plan' else '' }}" href="{{ url_for('study_plan') }}">▦ &nbsp; Study Plan</a>
+    <a class="{{ 'active' if request.endpoint in ['tasks','task_status','delete_task'] else '' }}" href="{{ url_for('tasks') }}">☑ &nbsp; Daily Tasks</a>
+    <a class="{{ 'active' if request.endpoint=='progress' else '' }}" href="{{ url_for('progress') }}">▥ &nbsp; Progress</a>
+    <a class="{{ 'active' if request.endpoint=='notes' else '' }}" href="{{ url_for('notes') }}">▧ &nbsp; Notes</a>
+    <a class="{{ 'active' if request.endpoint=='mock_tests' else '' }}" href="{{ url_for('mock_tests') }}">◷ &nbsp; Mock Tests</a>
+    <a class="{{ 'active' if request.endpoint=='settings' else '' }}" href="{{ url_for('settings') }}">⚙ &nbsp; Profile / Settings</a>
+  </nav>
+  <a class="logout" href="{{ url_for('logout') }}">⇥ &nbsp; Logout</a>
+</aside>
+{% endif %}
+<main class="{{ 'main with-sidebar' if session.get('user_id') else 'main auth-main' }}">
+  {% if session.get('user_id') %}
+  <header class="topbar"><div class="mobile-brand">Study Planner</div><span>Hello, {{ user.full_name.split()[0] if user else 'Student' }} 👋</span></header>
+  {% endif %}
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}<div class="flash-wrap">{% for category,message in messages %}<div class="flash {{ category }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+  {% endwith %}
+  {% block content %}{% endblock %}
+</main>
+</body>
+</html>
